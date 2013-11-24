@@ -1,0 +1,12 @@
+<div class="entry-edit">
+    <!-- Checkout Comment -->
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-billing-address">
+            <?php echo Mage::helper('sales')->__('Checkout Comment') ?>
+        </h4>
+    </div>
+    <fieldset>
+        <?php echo $this->escapeHtml($this->getCommentModel()->getComment()) ?>
+    </fieldset>
+</div>
+<div class="clear"></div>

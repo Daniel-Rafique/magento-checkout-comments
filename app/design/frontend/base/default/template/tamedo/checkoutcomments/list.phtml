@@ -1,0 +1,24 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Checkout Comments') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+
+<?php if ($this->getComments()->getSize()) : ?>
+
+<table class="data-table" id="your-checkout-comments-table">
+
+   <?php foreach ($this->getComments() as $_comment) : ?>
+
+    <tr>
+        <td><?php echo $_comment->getId() ?></td>
+        <td><?php echo $this->escapeHtml($_comment->getComment()) ?></td>
+        <td><?php echo $_comment->getProductNames() ?></td>
+        <td><?php echo $_comment->getStatus() ?></td>
+        <td><a href="<?php echo $this->getUrl('sales/order/view'), array('order_id' => $_comment->getOrderId()) ?>">
+            <?php echo $this->formatDate($_comment->getCreatedAt(), 'medium', true) ?>
+        </a></td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>

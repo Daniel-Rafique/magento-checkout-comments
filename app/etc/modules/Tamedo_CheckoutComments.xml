@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tamedo_CheckoutComments>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Sales/>
+                <Mage_CatalogInventory/>
+                <Mage_Checkout />
+            </depends>
+        </Tamedo_CheckoutComments>
+    </modules>
+</config>

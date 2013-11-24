@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tamedo_CheckoutComments>
+            <version>0.0.1</version>
+        </Tamedo_CheckoutComments>
+    </modules>
+    <global>
+        <resources>
+            <checkoutcomments_setup>
+                <setup>
+                    <module>Tamedo_CheckoutComments</module>
+                </setup>
+            </checkoutcomments_setup>
+        </resources>
+
+        <blocks>
+            <checkoutcomments>
+                <class>Tamedo_CheckoutComments_Block</class>
+            </checkoutcomments>
+        </blocks>
+
+        <models>
+            <checkoutcomments>
+                <class>Tamedo_CheckoutComments_Model</class>
+                <resourceModel>checkoutcomments_resource</resourceModel>
+            </checkoutcomments>
+
+            <checkoutcomments_resource>
+                <class>Tamedo_CheckoutComments_Model_Resource</class>
+                <entities>
+                    <comments_table>
+                        <table>checkout_comments</table>
+                    </comments_table>
+                </entities>
+            </checkoutcomments_resource>
+        </models>
+    </global>
+
+    <frontend>
+        <routers>
+            <checkoutcomments>
+                <use>standard</use>
+                <args>
+                    <module>Tamedo_CheckoutComments</module>
+                    <frontName>checkoutcomments</frontName>
+                </args>
+            </checkoutcomments>
+        </routers>
+
+        <layout>
+            <updates>
+                <checkoutcomments>
+                    <file>tamedo/checkoutcomments.xml</file>
+                </checkoutcomments>
+            </updates>
+        </layout>
+
+        <events>
+            <controller_action_predispatch_checkout_onepage_saveOrder>
+                <observers>
+                    <save_checkout_comments>
+                        <class>checkoutcomments/observer</class>
+                        <method>prepareCheckoutComment</method>
+                    </save_checkout_comments>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_saveOrder>
+
+            <sales_order_place_after>
+                <observers>
+                    <save_checkout_comments>
+                        <class>checkoutcomments/observer</class>
+                        <method>saveCheckoutComment</method>
+                    </save_checkout_comments>
+                </observers>
+            </sales_order_place_after>
+        </events>
+
+    </frontend>
+
+    <adminhtml>
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <display_checkout_comment>
+                        <class>checkoutcomments/observer</class>
+                        <method>displayCheckoutComment</method>
+                    </display_checkout_comment>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </adminhtml>
+
+</config>
